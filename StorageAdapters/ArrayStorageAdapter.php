@@ -15,12 +15,12 @@ class ArrayStorageAdapter implements \GroundSix\StringComponent\StorageAdapters\
 		$this->strings = $strings;
 	}
 
-	public function getString($key)
+	public function getString($key, $language = null)
 	{
 		return $this->strings[$key];
 	}
 	
-	public function getRelatedStrings($search_term)
+	public function getRelatedStrings($search_term, $language = null)
 	{
 		$result = array();
 		foreach($this->strings as $key => $value){
@@ -31,12 +31,12 @@ class ArrayStorageAdapter implements \GroundSix\StringComponent\StorageAdapters\
 		return $result;
 	}
 	
-	public function getAllStrings()
+	public function getAllStrings($language = null)
 	{
 		return $this->strings;
 	}
 
-	public function containsString($key)
+	public function containsString($key, $language = null)
 	{
 		return (isset($this->strings[$key]) && !is_null($this->strings[$key])) ? true : false;
 	}

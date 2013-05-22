@@ -2,7 +2,7 @@
 namespace GroundSix\StringComponent;
 use StorageAdapters\StorageAdapterInterface;
 
-class StringComponent extends \SplPriorityQueue{
+class StringComponent{
 
 	private $language;
 	private $storageAdapterContainer;
@@ -17,13 +17,14 @@ class StringComponent extends \SplPriorityQueue{
 		$this->storageAdapterContainer->insert($storageAdapter, $priority);
 	}
 
-	public function getString($key)
+	public function getString($key, $language = null)
 	{
+		$language = (is_null($language)) ? $this->getLanguage() : $language;
 		$storage_adapters = clone $this->storageAdapterContainer;
 		while($storage_adapters->valid()){
 			$storage_adapter = $storage_adapters->current();
-			if($storage_adapter->containsString($key)){
-				return $storage_adapter->getString($key);
+			if($storage_adapter->containsString($key,$language)){
+				return $storage_adapter->getString($key,$language);
 			}
 			$storage_adapters->next();
 		}
