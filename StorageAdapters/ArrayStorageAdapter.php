@@ -1,7 +1,7 @@
 <?php
 namespace GroundSix\StringComponent\StorageAdapters;
 
-class ArrayStorageAdapter implements StorageAdapterInterface{
+class ArrayStorageAdapter implements \GroundSix\StringComponent\StorageAdapters\StorageAdapterInterface{
 
 	private $strings = null;
 
@@ -23,7 +23,7 @@ class ArrayStorageAdapter implements StorageAdapterInterface{
 	public function getRelatedStrings($search_term)
 	{
 		$result = array();
-		for($this->strings as $key => $value){
+		foreach($this->strings as $key => $value){
 			if(strstr($key, $search_term) !== FALSE){
 				$result[] = $value;
 			}

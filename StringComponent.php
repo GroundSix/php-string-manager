@@ -1,7 +1,6 @@
 <?php 
 namespace GroundSix\StringComponent;
 use StorageAdapters\StorageAdapterInterface;
-use StorageAdapters\StorageAdapterContainer;
 
 class StringComponent extends \SplPriorityQueue{
 
@@ -10,10 +9,10 @@ class StringComponent extends \SplPriorityQueue{
 
 	public function __construct($storageAdapterContainer = null)
 	{
-		$this->storageAdapterContainer = (is_null($storageAdapterContainer)) ? new \StorageAdapterContainer() : $storageAdapterContainer;
+		$this->storageAdapterContainer = (is_null($storageAdapterContainer)) ? new \GroundSix\StringComponent\StorageAdapters\StorageAdapterContainer() : $storageAdapterContainer;
 	}
 
-	public function addAdapter(\StorageAdapterInterface $storageAdapter, $priority)
+	public function addAdapter(\GroundSix\StringComponent\StorageAdapters\StorageAdapterInterface $storageAdapter, $priority)
 	{
 		$this->storageAdapterContainer->insert($storageAdapter, $priority);
 	}
@@ -26,6 +25,7 @@ class StringComponent extends \SplPriorityQueue{
 			if($storage_adapter->containsString($key)){
 				return $storage_adapter->getString($key);
 			}
+			$storage_adapters->next();
 		}
 		return false;
 	}
