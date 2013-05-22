@@ -35,4 +35,9 @@ class ArrayStorageAdapter implements StorageAdapterInterface{
 	{
 		return $this->strings;
 	}
+
+	public function containsString($key)
+	{
+		return (isset($this->strings[$key]) && !is_null($this->strings[$key])) ? true : false;
+	}
 }
