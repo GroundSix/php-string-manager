@@ -10,10 +10,10 @@ class StringComponent extends \SplPriorityQueue{
 
 	public function __construct($storageAdapterContainer = null)
 	{
-		$this->storageAdapterContainer = (is_null($storageAdapterContainer)) ? new StorageAdapterContainer() : $storageAdapterContainer;
+		$this->storageAdapterContainer = (is_null($storageAdapterContainer)) ? new \StorageAdapterContainer() : $storageAdapterContainer;
 	}
 
-	public function addAdapter(StorageAdapterInterface $storageAdapter, $priority)
+	public function addAdapter(\StorageAdapterInterface $storageAdapter, $priority)
 	{
 		$this->storageAdapterContainer->insert($storageAdapter, $priority);
 	}
