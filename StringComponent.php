@@ -4,11 +4,12 @@ use StorageAdapters\StorageAdapterInterface;
 
 class StringComponent implements \arrayaccess{
 
-	private $language;
+	private $renderer;
 	private $storageAdapterContainer;
 
-	public function __construct($language,$storageAdapterContainer = null)
+	public function __construct($renderer,$language,$storageAdapterContainer = null)
 	{
+		$this->renderer = $renderer;
 		$this->language = $language;
 		$this->storageAdapterContainer = (is_null($storageAdapterContainer)) ? new \GroundSix\StringComponent\StorageAdapters\StorageAdapterContainer() : $storageAdapterContainer;
 	}
@@ -18,12 +19,18 @@ class StringComponent implements \arrayaccess{
 		$this->storageAdapterContainer->insert($storageAdapter, $priority);
 	}
 
-	public function getString($key, $language = null)
+	public function getString($key, $model = array(), $language = null)
 	{
 		$language = (is_null($language)) ? $this->getLanguage() : $language;
 		$key = $key.'.'.$language;
 		$storage_adapter = $this->getStorageAdapterFromQueue($key);
-		return ($storage_adapter !== false) ? $storage_adapter->getString($key) : false;
+
+		if($storage_adapter == false){
+			return false;
+		}
+
+		$string = $storage_adapter->getString($key);
+		return $this->renderString($string, $model);
 	}
 
 	public function getRelatedStrings($key, $language = null)
@@ -45,6 +52,11 @@ class StringComponent implements \arrayaccess{
 			$storage_adapters->next();
 		 }
 		 return false;
+	}
+
+	private function renderString($string,$model)
+	{
+		return $this->renderer->render($string,$model);
 	}
 
 	public function setLanguage( $language )
