@@ -1,6 +1,7 @@
 <?php 
 namespace GroundSix\StringComponent;
 use StorageAdapters\StorageAdapterInterface;
+use StorageAdapters\StorageAdapterContainer;
 
 class StringComponent extends \SplPriorityQueue{
 
