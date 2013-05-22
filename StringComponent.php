@@ -1,18 +1,19 @@
 <?php 
 namespace GroundSix\StringComponent;
+use StorageAdapters\StorageAdapterInterface;
 
-class StringComponent{
+class StringComponent extends \SplPriorityQueue{
 
-	private $storageAdapter;
 	private $language;
 
-	public function __construct(){
+	public function __construct()
+	{
 
 	}
 
-	public function setStorageAdapter( $storageAdapter )
+	public function addAdapter(StorageAdapterInterface $storageAdapter, $priority)
 	{
-		$this->storageAdapter = $storageAdapter;
+		parent::insert($storageAdapter, $priority);
 	}
 
 	public function setLanguage( $language )
