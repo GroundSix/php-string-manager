@@ -20,17 +20,31 @@ class StringComponent implements \arrayaccess{
 
 	public function getString($key, $language = null)
 	{
-		
 		$language = (is_null($language)) ? $this->getLanguage() : $language;
+		$key = $key.'.'.$language;
+		$storage_adapter = $this->getStorageAdapterFromQueue($key);
+		return ($storage_adapter !== false) ? $storage_adapter->getString($key) : false;
+	}
+
+	public function getRelatedStrings($key, $language = null)
+	{
+		$language = (is_null($language)) ? $this->getLanguage() : $language;
+		$key = $key.'.'.$language;
+		$storage_adapter = $this->getStorageAdapterFromQueue($key);
+		return ($storage_adapter !== false) ? $storage_adapter->getRelatedStrings($key) : array();
+	}	
+
+	private function getStorageAdapterFromQueue($key)
+	{
 		$storage_adapters = clone $this->storageAdapterContainer;
 		while($storage_adapters->valid()){
 		 	$storage_adapter = $storage_adapters->current();
-		 	if($storage_adapter->containsString($key.'.'.$language) == true){
-		 		return $storage_adapter->getString($key.'.'.$language);
+		 	if($storage_adapter->containsString($key) == true){
+		 		return $storage_adapter;
 		 	} 
 			$storage_adapters->next();
 		 }
-		return false;
+		 return false;
 	}
 
 	public function setLanguage( $language )
