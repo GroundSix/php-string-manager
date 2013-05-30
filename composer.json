@@ -1,6 +1,6 @@
 {
 
-	"name": "groundsix/php-string-component",
+    "name": "groundsix/php-string-component",
     "type": "library",
     "description": "A component for centralizing string storage in PHP applications.",
     "keywords": ["php","strings"],
@@ -13,6 +13,10 @@
         "psr-0": { "GroundSix\\StringComponent": "" }
     },
 
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+
+    "require": {
+        "symfony/yaml" : "2.1.0"
+    }
 
 }
