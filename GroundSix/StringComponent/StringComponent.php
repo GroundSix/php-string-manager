@@ -74,19 +74,23 @@ class StringComponent implements \arrayaccess{
 	 	return $this->language;
 	}
 
-	public function offsetExists ( $offset ){
+	public function offsetExists ( $offset )
+	{
 		return ($this->getString($offset) !== false) ? true : false;
 	}
 
-	public function offsetGet ( $offset ){
+	public function offsetGet ( $offset )
+	{
 		return $this->getString($offset);
 	}
 
-	public function offsetSet ( $offset , $value ){
+	public function offsetSet ( $offset , $value )
+	{
 		return null;
 	}
 
-	public function offsetUnset ( $offset ){
+	public function offsetUnset ( $offset )
+	{
 		return null;
 	}
 }
