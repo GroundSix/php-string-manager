@@ -15,7 +15,7 @@ class YamlStorageAdapter implements \GroundSix\StringComponent\StorageAdapters\S
 	public function setStrings($yaml_file_path)
 	{
 		if(!is_null($yaml_file_path) && file_exists($yaml_file_path)){
-            $this->strings = $yaml->parse(file_get_contents($yaml_file_path));
+            $this->strings = $this->yaml->parse(file_get_contents($yaml_file_path));
 		}
 	}
 
