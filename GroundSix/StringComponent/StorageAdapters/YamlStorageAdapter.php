@@ -8,7 +8,7 @@ class YamlStorageAdapter implements \GroundSix\StringComponent\StorageAdapters\S
 
 	public function __construct($yaml_file_path)
 	{
-		$this->yaml = new Symfony\Component\Yaml\Parser();
+		$this->yaml = new \Symfony\Component\Yaml\Parser();
         $this->setStrings($yaml_file_path);
 	}	
 
